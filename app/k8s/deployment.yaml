@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cisco-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cisco-app
+  template:
+    metadata:
+      labels:
+        app: cisco-app
+    spec:
+      containers:
+      - name: app
+        image: cisco-demo:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
