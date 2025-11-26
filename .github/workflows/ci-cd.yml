@@ -53,6 +53,6 @@ jobs:
 
     - name: Deploy latest image
       run: |
-        kubectl set image deployment/cisco-demo \
+        kubectl --kubeconfig=kubeconfig set image deployment/cisco-demo \
           cisco-demo=ghcr.io/${{ github.repository_owner }}/cisco-ci-cd-demo:latest
 
